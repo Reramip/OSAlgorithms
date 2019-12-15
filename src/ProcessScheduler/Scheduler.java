@@ -1,6 +1,7 @@
-package ProcessScheduler;
+package processscheduler;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 abstract class Scheduler {
     protected final int[] arriveTime;

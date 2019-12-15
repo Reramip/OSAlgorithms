@@ -1,8 +1,6 @@
-package ProcessScheduler;
+package processscheduler;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class SPNScheduler extends Scheduler {
     SPNScheduler(int[] arriveTime, int[] serveTime) {

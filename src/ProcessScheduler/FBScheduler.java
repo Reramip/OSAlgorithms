@@ -1,4 +1,5 @@
-package ProcessScheduler;
+package processscheduler;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;

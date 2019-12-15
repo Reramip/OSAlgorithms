@@ -1,7 +1,6 @@
-package ProcessScheduler;
+package processscheduler;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class SRTScheduler extends Scheduler {
     SRTScheduler(int[] arriveTime, int[] serveTime) {

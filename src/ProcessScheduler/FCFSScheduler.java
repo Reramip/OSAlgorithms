@@ -1,9 +1,7 @@
-package ProcessScheduler;
+package processscheduler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class FCFSScheduler extends Scheduler {
     FCFSScheduler(int[] arriveTime, int[] serveTime) {
