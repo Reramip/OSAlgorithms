@@ -9,9 +9,11 @@ class Producer implements Runnable {
         while (true) {
             try {
                 System.out.println("生产数据");
+                Thread.sleep(5);
                 ProducerConsumer.buffer.acquire();
                 ProducerConsumer.mutex.acquire();
                 System.out.println("写入数据");
+                Thread.sleep(10);
                 ProducerConsumer.mutex.release();
                 ProducerConsumer.resource.release();
             } catch (InterruptedException e) {
@@ -30,6 +32,7 @@ class Consumer implements Runnable {
                 ProducerConsumer.resource.acquire();
                 ProducerConsumer.mutex.acquire();
                 System.out.println("读取数据");
+                Thread.sleep(10);
                 ProducerConsumer.mutex.release();
                 ProducerConsumer.buffer.release();
             } catch (InterruptedException e) {
