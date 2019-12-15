@@ -29,7 +29,6 @@ class Philosopher implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }
