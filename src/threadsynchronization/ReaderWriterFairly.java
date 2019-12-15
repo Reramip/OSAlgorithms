@@ -17,6 +17,7 @@ class FairReader implements Runnable {
                 ReaderWriterFairly.readCountMutex.release();
                 ReaderWriterFairly.accessible.release();
                 System.out.println("读数据");
+                Thread.sleep(10);
                 ReaderWriterFairly.readCountMutex.acquire();
                 ReaderWriterFairly.readCount--;
                 if (ReaderWriterFairly.readCount == 0) {
@@ -39,6 +40,7 @@ class FairWriter implements Runnable {
                 ReaderWriterFairly.accessible.acquire();
                 ReaderWriterFairly.writable.acquire();
                 System.out.println("写数据");
+                Thread.sleep(10);
                 ReaderWriterFairly.writable.release();
                 ReaderWriterFairly.accessible.release();
             } catch (InterruptedException e) {

@@ -17,6 +17,7 @@ class WFReader implements Runnable {
                 WriterFirst.readCountMutex.release();
                 WriterFirst.readable.release();
                 System.out.println("读数据");
+                Thread.sleep(10);
                 WriterFirst.readCountMutex.acquire();
                 WriterFirst.readCount--;
                 if (WriterFirst.readCount == 0) {
@@ -44,6 +45,7 @@ class WFWriter implements Runnable {
                 WriterFirst.writeCountMutex.release();
                 WriterFirst.writable.acquire();
                 System.out.println("写数据");
+                Thread.sleep(10);
                 WriterFirst.writable.release();
                 WriterFirst.writeCountMutex.acquire();
                 WriterFirst.writeCount--;

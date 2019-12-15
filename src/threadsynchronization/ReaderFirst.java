@@ -15,6 +15,7 @@ class RFReader implements Runnable {
                 }
                 ReaderFirst.mutex.release();
                 System.out.println("读数据");
+                Thread.sleep(10);
                 ReaderFirst.mutex.acquire();
                 ReaderFirst.readCount--;
                 if (ReaderFirst.readCount == 0) {
@@ -36,6 +37,7 @@ class RFWriter implements Runnable {
             try {
                 ReaderFirst.writable.acquire();
                 System.out.println("写数据");
+                Thread.sleep(10);
                 ReaderFirst.writable.release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
