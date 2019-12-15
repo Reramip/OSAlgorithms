@@ -12,16 +12,16 @@ class Philosopher implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 System.out.printf("哲学家%d思考\n", number);
                 Thread.sleep(10);
-                int first=Math.min(number%5,(number+1)%5);
-                int second=Math.max(number%5,(number+1)%5);
+                int first = Math.min(number % 5, (number + 1) % 5);
+                int second = Math.max(number % 5, (number + 1) % 5);
                 // 先左后右拿
                 DinningPhilosopher.forks[first].acquire();
                 DinningPhilosopher.forks[second].acquire();
-                System.out.printf("哲学家%d吃饭\n",number);
+                System.out.printf("哲学家%d吃饭\n", number);
                 Thread.sleep(10);
                 // 先右后左放
                 DinningPhilosopher.forks[second].release();
