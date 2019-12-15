@@ -2,22 +2,22 @@ package threadsynchronization;
 
 import java.util.concurrent.Semaphore;
 
-class RFReader implements Runnable{
+class RFReader implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 ReaderFirst.mutex.acquire();
                 ReaderFirst.readCount++;
-                if(ReaderFirst.readCount==1){
+                if (ReaderFirst.readCount == 1) {
                     ReaderFirst.writable.acquire();
                 }
                 ReaderFirst.mutex.release();
                 System.out.println("读数据");
                 ReaderFirst.mutex.acquire();
                 ReaderFirst.readCount--;
-                if(ReaderFirst.readCount==0){
+                if (ReaderFirst.readCount == 0) {
                     ReaderFirst.writable.release();
                 }
                 ReaderFirst.mutex.release();
@@ -28,11 +28,11 @@ class RFReader implements Runnable{
     }
 }
 
-class RFWriter implements Runnable{
+class RFWriter implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        while(true) {
+        while (true) {
             try {
                 ReaderFirst.writable.acquire();
                 System.out.println("写数据");
@@ -45,9 +45,9 @@ class RFWriter implements Runnable{
 }
 
 public class ReaderFirst {
-    public static int readCount=0;
-    public static Semaphore mutex=new Semaphore(1);
-    public static Semaphore writable=new Semaphore(1);
+    public static int readCount = 0;
+    public static Semaphore mutex = new Semaphore(1);
+    public static Semaphore writable = new Semaphore(1);
 
     public static void main(String[] args) {
         new Thread(new RFReader()).start();

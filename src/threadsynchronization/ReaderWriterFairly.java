@@ -2,16 +2,16 @@ package threadsynchronization;
 
 import java.util.concurrent.Semaphore;
 
-class FairReader implements Runnable{
+class FairReader implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 ReaderWriterFairly.accessible.acquire();
                 ReaderWriterFairly.readCountMutex.acquire();
                 ReaderWriterFairly.readCount++;
-                if(ReaderWriterFairly.readCount==1){
+                if (ReaderWriterFairly.readCount == 1) {
                     ReaderWriterFairly.writable.acquire();
                 }
                 ReaderWriterFairly.readCountMutex.release();
@@ -19,7 +19,7 @@ class FairReader implements Runnable{
                 System.out.println("读数据");
                 ReaderWriterFairly.readCountMutex.acquire();
                 ReaderWriterFairly.readCount--;
-                if(ReaderWriterFairly.readCount==0){
+                if (ReaderWriterFairly.readCount == 0) {
                     ReaderWriterFairly.writable.release();
                 }
                 ReaderWriterFairly.readCountMutex.release();
@@ -30,11 +30,11 @@ class FairReader implements Runnable{
     }
 }
 
-class FairWriter implements Runnable{
+class FairWriter implements Runnable {
     @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        while(true){
+        while (true) {
             try {
                 ReaderWriterFairly.accessible.acquire();
                 ReaderWriterFairly.writable.acquire();
@@ -49,10 +49,10 @@ class FairWriter implements Runnable{
 }
 
 public class ReaderWriterFairly {
-    public static int readCount=0;
-    public static Semaphore readCountMutex=new Semaphore(1);
-    public static Semaphore writable=new Semaphore(1);
-    public static Semaphore accessible=new Semaphore(1);
+    public static int readCount = 0;
+    public static Semaphore readCountMutex = new Semaphore(1);
+    public static Semaphore writable = new Semaphore(1);
+    public static Semaphore accessible = new Semaphore(1);
 
     public static void main(String[] args) {
         new Thread(new FairReader()).start();
