@@ -2,10 +2,11 @@ package threadsynchronization;
 
 import java.util.concurrent.Semaphore;
 
-class Producer implements Runnable{
+class Producer implements Runnable {
+    @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        for(int i=0;i<100;++i) {
+        while (true) {
             try {
                 System.out.println("生产数据");
                 ProducerConsumer.buffer.acquire();
@@ -20,10 +21,11 @@ class Producer implements Runnable{
     }
 }
 
-class Consumer implements Runnable{
+class Consumer implements Runnable {
+    @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
-        for(int i=0;i<100;++i) {
+        while (true) {
             try {
                 ProducerConsumer.resource.acquire();
                 ProducerConsumer.mutex.acquire();
@@ -38,9 +40,9 @@ class Consumer implements Runnable{
 }
 
 public class ProducerConsumer {
-    public static Semaphore mutex=new Semaphore(1);
-    public static Semaphore buffer=new Semaphore(1);
-    public static Semaphore resource=new Semaphore(0);
+    public static Semaphore mutex = new Semaphore(1);
+    public static Semaphore buffer = new Semaphore(1);
+    public static Semaphore resource = new Semaphore(0);
 
     public static void main(String[] args) {
         new Thread(new Producer()).start();
