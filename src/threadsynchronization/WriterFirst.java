@@ -8,6 +8,7 @@ class WFReader implements Runnable {
     public void run() {
         while (true) {
             try {
+                WriterFirst.readWait.acquire();
                 WriterFirst.readable.acquire();
                 WriterFirst.readCountMutex.acquire();
                 WriterFirst.readCount++;
@@ -16,6 +17,7 @@ class WFReader implements Runnable {
                 }
                 WriterFirst.readCountMutex.release();
                 WriterFirst.readable.release();
+                WriterFirst.readWait.release();
                 System.out.println("读数据");
                 Thread.sleep(10);
                 WriterFirst.readCountMutex.acquire();
@@ -64,6 +66,7 @@ public class WriterFirst {
     public static int readCount = 0;
     public static Semaphore readCountMutex = new Semaphore(1);
     public static Semaphore readable = new Semaphore(1);
+    public static Semaphore readWait = new Semaphore(1);
 
     public static int writeCount = 0;
     public static Semaphore writeCountMutex = new Semaphore(1);
